@@ -8,7 +8,7 @@ const reducer = (state = [], action) => {
     console.log(action);
     switch (action.type) {
         case ADD_TODO:
-            return [];
+            return [...state, { text: action.text, id: Date.now() }];
         case DELETE_TODO:
             return [];
         default:
@@ -16,7 +16,9 @@ const reducer = (state = [], action) => {
     }
 }
 
-const store = createStore(reducer)
+const store = createStore(reducer);
+
+store.subscribe(() => console.log(store.getState()))
 
 const onSubmit = e => {
     e.preventDefault();
